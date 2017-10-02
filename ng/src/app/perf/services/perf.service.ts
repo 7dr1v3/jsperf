@@ -26,9 +26,10 @@ export class PerfService {
           data[event.id] = [];
         }
         //handle event
+        _.debounce(() => { observer.next(data) }, 0);
         observer.next(data);
       }
-      this.counter.start(_.debounce(fn, 0).bind(this));
+      this.counter.start(fn);
     });
 
     return this.output;
