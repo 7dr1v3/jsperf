@@ -1,4 +1,4 @@
 server/node_modules
 client/node_modules
 client/dist
-#ng/node_modules
+ng/node_modules
