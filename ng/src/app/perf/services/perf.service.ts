@@ -17,6 +17,7 @@ export class PerfService {
   public start() {
     this.output = Observable.create(observer => {
       let data = [];
+      let debounced = _.debounce((data) => { observer.next(data) }, 0);
       let fn = (event)=>{
         if(event.action == "ADD") {
           data[event.id] = event.data
@@ -26,8 +27,7 @@ export class PerfService {
           data[event.id] = [];
         }
         //handle event
-        _.debounce(() => { observer.next(data) }, 0);
-        observer.next(data);
+        debounced(data);
       }
       this.counter.start(fn);
     });
